@@ -1,0 +1,27 @@
+﻿@using ProjektAspNetStudia.Resources
+@model ProjektAspNetStudia.Models.ViewModels.LoginViewModel
+<div class="container">
+    <div class="col">
+        <div class="row justify-content-center">
+            <form class="w-50" asp-controller="Login" asp-action="SignIn" method="post">
+                <div class="form-group">
+                    <span asp-validation-for="CustomErrorField" class="text-danger"></span><br />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email">@Strings.LoginFormLoginLabel</label>
+                    <input asp-for="Email" type="text" class="form-control" placeholder="@Strings.LoginFormLoginPlaceholder"/>
+                    <span asp-validation-for="Email" class="text-danger"></span><br/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password">@Strings.LoginFormPasswordLabel</label>
+                    <input asp-for="Password" type="password" class="form-control" id="passowordInput" placeholder="@Strings.LoginFormPasswordPlaceholder"/>
+                    <span asp-validation-for="Password" class="text-danger"></span><br/>
+                </div>
+                <div class="form-group">
+                    <span>@Strings.LoginFormRegisterQuestion <a asp-controller="Login" asp-action="HaveAccount">@Strings.LoginFormRegisterHyperlink</a></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block my-5">@Strings.LoginFormSubmitButton</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿@using ProjektAspNetStudia.Resources
+@model ProjektAspNetStudia.Models.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Chats";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="@Url.Content("~/css/messanger.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/autocomplete.css")" type="text/css" />
+}
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">@Strings.CreateNewRoomModalTitle</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="createRoomRoomName">@Strings.CreateNewRoomModalRoomNameLabel</label>
+                        <input type="text" class="form-control" id="createRoomRoomName"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="createRoomSelectedUsers">@Strings.CreateNewRoomModalSelectedUsersLabel</label>
+                        <div id="createRoomSelectedUsers" class="new_room_selected_users w-50 px-2 py-1"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="createRoomUserName">@Strings.CreateNewRoomModalSearchForUsersLabel</label>
+                        <input type="text" class="form-control" id="createRoomUserName"/>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="createRoomSendData" class="btn btn-primary" data-dismiss="modal">@Strings.CreateNewRoomModalCreateButtonText</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">@Strings.CreateNewRoomModalCloseButtonText</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="inbox_msg">
+    <div class="inbox_people">
+        <div class="headind_srch">
+            <div class="recent_heading">
+                <h4>Chats</h4>
+            </div>
+            <div class="create_new_room_button_wrapper">
+                <button type="button" class="btn create_new_room_button" title="Create new room" data-toggle="modal" data-target="#myModal">
+                    <i class="fas fa-folder-plus"></i>
+                </button>
+            </div>
+        </div>
+        @await Component.InvokeAsync("RecentChat")
+    </div>
+
+    @await Component.InvokeAsync("ChatPanel")
+</div>
+
+@section Scripts
+{
+    <script src="@Url.Content("~/lib/signalr/dist/browser/signalr.js")" ></script>
+    <script src="@Url.Content("~/js/autocomplete.js")"></script>
+    <script src="@Url.Content("~/js/chat.js")" ></script>
+}

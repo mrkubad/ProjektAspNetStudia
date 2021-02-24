@@ -1,0 +1,22 @@
+﻿@using ProjektAspNetStudia.Views.Shared.Components.RecentChat;
+@model List<RecentChatModel>
+
+
+<div class="inbox_chat">
+    @foreach (var chat in Model)
+    {
+        <div class="chat_list @(chat.IsActive ? "active_chat" : "") @(!chat.IsChatRead ? "chat_unread" : "")" data-chatid="@chat.ChatId">
+            <div class="chat_people">
+                <div class="chat_img">
+                    <img src="@Url.Content("~/img/unknown.jpg")" alt="user">
+                </div>
+                <div class="chat_ib">
+                    <h5>@chat.ChatName <span class="chat_date">@chat.LastMessageDate</span></h5>
+                    <p>
+                        @chat.LastMessageText
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

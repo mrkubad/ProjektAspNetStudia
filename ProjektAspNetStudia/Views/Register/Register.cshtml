@@ -1,0 +1,36 @@
+﻿@using ProjektAspNetStudia.Resources;
+@model ProjektAspNetStudia.Models.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<div class="container">
+    <div class="col">
+        <div class="row justify-content-center">
+            <form class="w-50" asp-controller="Register" asp-action="Register" method="post">
+                <div class="form-group">
+                    <label asp-for="FirstName">@Strings.RegisterFormFirstNameLabel</label>
+                    <input asp-for="FirstName" type="text" class="form-control" placeholder="@Strings.RegisterFormFirstNamePlaceholder">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName">@Strings.RegisterFormLastNameLabel</label>
+                    <input asp-for="LastName" type="text" class="form-control" id="lastNameInput" placeholder="@Strings.RegisterFormLastNamePlaceholder">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email">@Strings.RegisterFormEmailLabel</label>
+                    <input asp-for="Email" type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="@Strings.RegisterFormEmailPlaceholder">
+                    <small id="emailHelp" class="form-text text-muted">@Strings.RegisterFormEmailDescription</small>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password">@Strings.RegisterFormPasswordLabel</label>
+                    <input asp-for="Password" type="password" class="form-control" id="passowordInput" placeholder="@Strings.RegisterFormPasswordPlaceholder">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block my-5">@Strings.RegisterSubmitButtonContent</button>
+            </form>
+        </div>
+    </div>
+</div>

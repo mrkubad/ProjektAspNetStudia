@@ -1,0 +1,57 @@
+﻿@using ProjektAspNetStudia.Views.Shared.Components.ChatPanel
+@using Microsoft.EntityFrameworkCore
+@using System.Security.Cryptography.X509Certificates
+@model ChatPanelModel
+@inject AppDbContext DbContext
+
+@{
+    async Task<string> GetUserName(string userId)
+    {
+        var user = await DbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+        return string.Concat(user.FirstName, " ", user.LastName);
+    }
+}
+
+<div class="mesgs">
+    <div class="msg_history pt-2 px-2">
+        @foreach (var message in Model.Messages)
+        {
+            bool isMessageSendByCurrentUser = message.SentBy == Model.UserId;
+
+            var dateSentString = message.Sent.ToString("h:mm tt | MMMM d");
+            if (isMessageSendByCurrentUser)
+            {
+                <div class="outgoing_msg">
+                    <div class="sent_msg">
+                        <p>@message.Text</p>
+                        <span class="time_date">@dateSentString</span>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="incoming_msg">
+                    <div class="incoming_msg_img">
+                        <img src="@Url.Content("~/img/user-profile.png")" alt="user">
+                    </div>
+                    <div class="received_msg">
+                        <div class="received_withd_msg">
+                            <span class="sent_by">@await GetUserName(message.SentBy)</span>
+                            <p>@message.Text</p>
+                            <span class="time_date">@dateSentString</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+
+    <div class="input_msg_write p-2">
+        <input type="text" class="form-control write_msg" placeholder="Type a message..." />
+        <button class="btn btn-primary msg_send_btn">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
